@@ -112,7 +112,7 @@ class CRM_Core_Payment_PayflowLinkIPN extends CRM_Core_Payment_BaseIPN {
 
          $this->completeTransaction( $input, $ids, $objects, $transaction, $recur );
          return "success";
-	
+  
     }
 
     function main( ) 
@@ -133,14 +133,14 @@ class CRM_Core_Payment_PayflowLinkIPN extends CRM_Core_Payment_BaseIPN {
         $this->getInput( $input, $ids );
 
         if ( $component == 'event' ) {
-			    $ids['participant'] = self::retrieve( 'USER3', 'Integer', 'POST', true );
+          $ids['participant'] = self::retrieve( 'USER3', 'Integer', 'POST', true );
           $ids['event']       = self::retrieve( 'USER4'      , 'Integer', 'POST', true );
-		    } else {
+        } else {
             // get the optional ids
             $ids['membership']          = self::retrieve( 'USER5'       , 'Integer', 'POST', false );
-			$ids['contributionPage']     = self::retrieve( 'USER8'       , 'Integer', 'POST', false );
-			$ids['related_contact']     = self::retrieve( 'USER9'       , 'Integer', 'POST', false );
-			$ids['onbehalf_dupe_alert']     = self::retrieve( 'USER10'       , 'Integer', 'POST', false );
+      $ids['contributionPage']     = self::retrieve( 'USER8'       , 'Integer', 'POST', false );
+      $ids['related_contact']     = self::retrieve( 'USER9'       , 'Integer', 'POST', false );
+      $ids['onbehalf_dupe_alert']     = self::retrieve( 'USER10'       , 'Integer', 'POST', false );
    // $ids['contributionRecur']   = self::retrieve( 'contributionRecurID', 'Integer', 'POST', false );
 
  
@@ -152,7 +152,7 @@ class CRM_Core_Payment_PayflowLinkIPN extends CRM_Core_Payment_BaseIPN {
         $redirectURL = $this->getURLtoRedirectBrowserOnSuccess($component, $qfkey);
         self::$_paymentProcessor =& $objects['paymentProcessor'];
         if ( $this->single( $input, $ids, $objects, false, false ) == 'success'){
-             CRM_Utils_System::redirect( $redirectURL );	 
+             CRM_Utils_System::redirect( $redirectURL );   
          }else{
            //TODO  I guess we need a failed URL here
          }
@@ -165,11 +165,11 @@ class CRM_Core_Payment_PayflowLinkIPN extends CRM_Core_Payment_BaseIPN {
         }
 
      //   $input['txnType']       = self::retrieve( 'txn_type'          , 'String' , 'POST', false );
-	 if (self::retrieve( 'RESULT'    , 'String' , 'POST', false  ) == '0'){
-	 $input['paymentStatus'] = 'Completed';
-	 }else{
-	 	 $input['paymentStatus'] = 'Failed';
-	}
+   if (self::retrieve( 'RESULT'    , 'String' , 'POST', false  ) == '0'){
+   $input['paymentStatus'] = 'Completed';
+   }else{
+      $input['paymentStatus'] = 'Failed';
+  }
 
         $input['invoice']       = self::retrieve( 'USER2'           , 'String' , 'POST', true  );
         $input['amount']        = self::retrieve( 'AMOUNT'          , 'Money'  , 'POST', false  );
@@ -197,12 +197,12 @@ class CRM_Core_Payment_PayflowLinkIPN extends CRM_Core_Payment_BaseIPN {
                 $finalURL = CRM_Utils_System::url( 'civicrm/event/register',
                                                    "_qf_ThankYou_display=1&qfKey=$qfKey", 
                                                    false, null, false );
-			} elseif ( $component == "contribute" ) {
+      } elseif ( $component == "contribute" ) {
                 $finalURL = CRM_Utils_System::url( 'civicrm/contribute/transact',
                                                    "_qf_ThankYou_display=1&qfKey=$qfKey",
                                                    false, null, false );
-			}
-				return $finalURL;
+      }
+        return $finalURL;
 
     }
 }
