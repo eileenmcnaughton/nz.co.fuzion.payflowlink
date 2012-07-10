@@ -133,14 +133,14 @@ class CRM_Core_Payment_PayflowLink extends CRM_Core_Payment {
                 
         $processorURL = $this->_paymentProcessor['url_site'] ."?". $this->buildPaymentProcessorString($paymentProcessorParams);
         CRM_Utils_System::redirect( $processorURL) ;
-        		     
-    }	
+                 
+    }  
     /*
      * Get URL which the browser should be returned to if they cancel or are unsuccessful
      * @component string $omponent function is called from
      * @return string $cancelURL Fully qualified return URL
      * @todo Ideally this would be in the parent payment class
-     */	
+     */  
     function getCancelURL($component){
         $component = strtolower( $component );
         if ( $component != 'contribute' && $component != 'event' ) {
@@ -154,7 +154,7 @@ class CRM_Core_Payment_PayflowLink extends CRM_Core_Payment {
             $cancelURL = CRM_Utils_System::url( 'civicrm/contribute/transact',
                                                 "_qf_Confirm_display=true&qfKey={$params['qfKey']}", 
                                                 false, null, false );
-        }	
+        }  
         return $cancelURL;
     }
     
@@ -168,34 +168,34 @@ class CRM_Core_Payment_PayflowLink extends CRM_Core_Payment {
        $partner = (empty($this->_paymentProcessor['signature'] )) ? 'PAYPAL' : $this->_paymentProcessor['signature'];
        
        $processorParams = array(
-       													'TYPE'        => 'S',
+                                 'TYPE'        => 'S',
                                 'ADDRESS'     =>  $this->URLencodetoMaximumLength($params['street_address'],60),
-                                'CITY'	      =>  $this->URLencodetoMaximumLength($params['city'],32),
-      													'LOGIN'       =>  $this->_paymentProcessor['user_name'],		
-                                'PARTNER'	    =>  $partner,
+                                'CITY'        =>  $this->URLencodetoMaximumLength($params['city'],32),
+                                'LOGIN'       =>  $this->_paymentProcessor['user_name'],    
+                                'PARTNER'      =>  $partner,
                                 'AMOUNT'      =>  $params['amount'],
-                                'ZIP'			    =>  $this->URLencodetoMaximumLength($params['postal_code'],10),
-                                'COUNTRY'	    =>  $params['country'],
+                                'ZIP'          =>  $this->URLencodetoMaximumLength($params['postal_code'],10),
+                                'COUNTRY'      =>  $params['country'],
                                 'COMMENT1'    =>  'civicrm contact ID ' . $params['contactID'],//ref not returned to Civi but visible in paypal
                                 'COMMENT2'    =>  'contribution id ' . $params['contributionID'],//ref not returned to Civi but visible in paypal
-                                'CUSTID'	    =>  $params['contributionIDinvoiceID'],//11 max
+                                'CUSTID'      =>  $params['contributionIDinvoiceID'],//11 max
                                 'DESCRIPTION' =>  $this->URLencodetoMaximumLength($params['description'],255),//255
                                 'EMAIL'       =>  $params['email'],
-                                'INVOICE'			=>  $params['contributionID'],//9 max
-                                'NAME'				=>  $this->URLencodetoMaximumLength($params['display_name'],60),
- //                              'PONUM'				=> //purchase order
+                                'INVOICE'      =>  $params['contributionID'],//9 max
+                                'NAME'        =>  $this->URLencodetoMaximumLength($params['display_name'],60),
+ //                              'PONUM'        => //purchase order
  //                              'TAX'//
-                                'STATE'			  => $params['state_province'],
-                                'USER1'			  => $params['contactID'],//USER fields are returned to Civi silent POST. Add them all in here for debug help.
-                                'USER2'				=> $params['invoiceID'], 
-                                'USER3'				=> CRM_Utils_Array::value('participantID',$params),      
-                                'USER4'				=> CRM_Utils_Array::value('eventID',$params), 
-                                'USER5'				=> CRM_Utils_Array::value( 'membershipID', $params ),    
-                                'USER6'				=> CRM_Utils_Array::value( 'pledgeID', $params ), 
-	              						    'USER7'				=> $component . ", " .  $params['qfKey'],
-	                							'USER8'				=> CRM_Utils_Array::value('contributionPageID',$params), 
-                								'USER9'				=> CRM_Utils_Array::value('related_contact',$params),
-                								'USER10'			=> CRM_Utils_Array::value( 'onbehalf_dupe_alert', $params ),								
+                                'STATE'        => $params['state_province'],
+                                'USER1'        => $params['contactID'],//USER fields are returned to Civi silent POST. Add them all in here for debug help.
+                                'USER2'        => $params['invoiceID'], 
+                                'USER3'        => CRM_Utils_Array::value('participantID',$params),      
+                                'USER4'        => CRM_Utils_Array::value('eventID',$params), 
+                                'USER5'        => CRM_Utils_Array::value( 'membershipID', $params ),    
+                                'USER6'        => CRM_Utils_Array::value( 'pledgeID', $params ), 
+                                'USER7'        => $component . ", " .  $params['qfKey'],
+                                'USER8'        => CRM_Utils_Array::value('contributionPageID',$params), 
+                                'USER9'        => CRM_Utils_Array::value('related_contact',$params),
+                                'USER10'      => CRM_Utils_Array::value( 'onbehalf_dupe_alert', $params ),                
        );
       return $processorParams;
     }
