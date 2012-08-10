@@ -30,7 +30,7 @@
 require_once 'CRM/Core/Payment.php';
 
 
-class nz.co.fuzion.payflowlink extends CRM_Core_Payment {
+class nz_co_fuzion_payflowlink extends CRM_Core_Payment {
     const
         CHARSET = 'iso-8859-1';
     static protected $_mode = null;
