@@ -70,7 +70,7 @@ class nz_co_fuzion_payflowlink extends CRM_Core_Payment {
     static function &singleton( $mode, &$paymentProcessor ) {
         $processorName = $paymentProcessor['name'];
         if (self::$_singleton[$processorName] === null ) {
-            self::$_singleton[$processorName] = new nz.co.fuzion.payflowlink( $mode, $paymentProcessor );
+            self::$_singleton[$processorName] = new nz_co_fuzion_payflowlink( $mode, $paymentProcessor );
         }
         return self::$_singleton[$processorName];
     }
@@ -124,7 +124,7 @@ class nz_co_fuzion_payflowlink extends CRM_Core_Payment {
         //doesn't look like these can actually be passed in....      
         $config    = CRM_Core_Config::singleton( );
         $cancelURL = $this->getCancelURL($component);     
-        $url = $config->userFrameworkResourceURL."extern/payFlowLinkIPN.php";
+        $url = $config->userFrameworkResourceURL."extern/ipn.php?processor_name=nz.co.fuzion.payflowlink";
         $component = strtolower( $component );
         $paymentProcessorParams = $this->mapParamstoPaymentProcessorFields( $params,$component );
         
