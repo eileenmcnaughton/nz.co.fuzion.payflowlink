@@ -2,7 +2,7 @@
 <extension key="nz.co.fuzion.payflowlink" type="payment">
   <downloadUrl>http://github.com/downloads/eileenmcnaughton/nz.co.fuzion.payflowlink/nz.co.fuzion.payflowlink.zip</downloadUrl>
   <file>PayflowLink</file>
-  <name>nz.co.fuzion.payflowlink</name>
+  <name>PayflowLink</name>
   <description>Payflow Link Payment Processor</description>
   <urls>
     <url desc="Main Extension Page">http://civicrm.org</url>
